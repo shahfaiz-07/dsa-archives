@@ -41,10 +41,12 @@ export function FolderList({ path }: { path: string }) {
     loading ? (<div className='flex justify-center'>
       <Spinner classNames={{ label: "text-foreground mt-4" }} variant="gradient" />
     </div>) : (
-      <Accordion variant='splitted' selectionMode='multiple'>
-        {nodes.filter((node) => node.name !== ".gitignore").map((node) => {
+      <Accordion isCompact selectionMode='multiple' className='text-xs px-0 py-1'>
+        {nodes.filter((node) => node.name !== ".gitignore" && node.name !== "metadata.json").map((node) => {
           return (
-            <AccordionItem key={node.path} title={`${node.name}`} className='font-mono' startContent={node.path.toLowerCase().includes("/leetcode") ? <SiLeetcode /> : node.path.toLowerCase().includes("/gfg") ? <SiGeeksforgeeks /> : ""}>
+            <AccordionItem key={node.path} title={<p className='text-xs md:text-base truncate max-w-[200px] sm:max-w-[300px]'>{node.name}</p>} 
+            textValue={node.name}
+            className='font-mono' startContent={node.path.toLowerCase().includes("/leetcode") ? <SiLeetcode /> : node.path.toLowerCase().includes("/gfg") ? <SiGeeksforgeeks /> : ""}>
               {node.type === "dir" ? (
                 <FolderList path={node.path} />
               ) : (

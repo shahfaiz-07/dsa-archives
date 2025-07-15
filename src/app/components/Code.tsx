@@ -21,10 +21,10 @@ const Code = ({url, lang}: {url: string, lang: string}) => {
   }, [url])
   return (
     <div className='flex flex-col gap-2'>
-      <Link href={link} isExternal showAnchorIcon>Visit Link</Link>
+      <Link href={link} isExternal showAnchorIcon className='text-sm md:text-base'>Visit Link</Link>
       <SyntaxHighlighter language={lang} style={a11yDark}>
-      {code}
-    </SyntaxHighlighter>
+        {code}
+      </SyntaxHighlighter>
     </div>
   );
 };

@@ -38,7 +38,7 @@ const Page = () => {
     }
 
     const search = () => {
-        if(searchString.length <= 2) {
+        if (searchString.length <= 2) {
             setIsInvalid(true)
             return;
         }
@@ -63,50 +63,52 @@ const Page = () => {
     useEffect(() => {
         fetchMetadata();
     }, [])
-  return (
-    <div className='min-h-screen flex flex-col justify-center items-center font-mono px-6 md:px-10 py-10'>
-        {
-            loading ? <Spinner color='primary' variant='gradient'/> : (<div className='flex flex-col justify-center items-center'>
-                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 flex gap-3 items-center"><CiSearch /> Search DSA Solutions</h1>
-            <p className="text-center text-sm md:text-base text-muted-foreground mb-6">
-            Enter a problem title, keyword, or URL from LeetCode, GFG, etc. to find my saved solutions.
-            </p>
-            <Input startContent={<FaSearch />} size='lg' placeholder='Type to search...' type='search' className='max-w-lg font-mono' color='primary' variant='underlined'
-            onChange={(e)=> {
-                setIsDirty(true)
-                return debounced(e.target.value)
-            }}
-            isInvalid={isDirty && isInvalid}
-            errorMessage={"Type atleast 3 characters..."}
-            />
+    return (
+        <main className='font-mono p-3 md:p-6'>
             {
-                isDirty && !isInvalid && (
-                    <div className='w-full mt-2'>
-                        <h1 className='text-xl font-bold font-mono'>Found {searchItems.length} Results:</h1>
-                        {
-                            searchItems.map((item) => <div key={item.path}>
-                                <Accordion variant="splitted" selectionMode='multiple' className='my-2 font-mono'>
+                loading ? <div className='min-h-screen grid place-content-center'><Spinner color='primary' variant='gradient' /></div> : (<div className='min-h-screen flex flex-col justify-center items-center gap-x-2'>
+                    <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 flex gap-3 items-center"><CiSearch /> Search DSA Solutions</h1>
+                    <p className="text-center text-sm md:text-base text-muted-foreground mb-6">
+                        Enter a problem title, keyword, or URL from LeetCode, GFG, etc. to find my saved solutions.
+                    </p>
+                    <Input startContent={<FaSearch />} size='lg' placeholder='Type to search...' type='search' className='font-mono max-w-lg' color='primary' variant='underlined'
+                        onChange={(e) => {
+                            setIsDirty(true)
+                            return debounced(e.target.value)
+                        }}
+                        isInvalid={isDirty && isInvalid}
+                        errorMessage={"Type atleast 3 characters..."}
+                    />
+                    {
+                        isDirty && !isInvalid && 
+                        (
+                            <div className='mt-2 w-full'>
+                                <h1 className='text-xl font-bold font-mono'>Found {searchItems.length} Results:</h1>
+                                <Accordion selectionMode='multiple' isCompact className=' font-mono px-0'>
                                     {
-                                        <AccordionItem key={item.path} title={
-                                            <div className='flex flex-wrap justify-between items-center overflow-hidden'>
-                                                <p className='text-xs md:text-base truncate max-w-[200px] sm:max-w-[300px]'>{item.name}</p>
-                                                <Chip className='text-xs justify-self-end' size='sm' color={item.path.toLowerCase().includes("/easy") ? "success" : item.path.toLowerCase().includes("/medium") ? "warning" : "danger"}>{item.path.toLowerCase().includes("/easy") ? "Easy" : item.path.toLowerCase().includes("/medium") ? "Medium" : "Hard"}</Chip>
-                                            </div>
-                                        } startContent={item.path.toLowerCase().includes("/leetcode") ? <SiLeetcode /> : item.path.toLowerCase().includes("/gfg") ? <SiGeeksforgeeks /> : ""}
-                                        >
-                                            <FolderList path={item.path}/>
-                                        </AccordionItem>
+                                        searchItems.map((item) =>
+                                            <AccordionItem key={item.path} title={
+                                                <div className='flex flex-wrap justify-between items-center'>
+                                                    <p className='text-xs md:text-base truncate max-w-[200px] sm:max-w-[300px]'>{item.name}</p>
+                                                    <Chip className='text-xs justify-self-end' size='sm' color={item.path.toLowerCase().includes("/easy") ? "success" : item.path.toLowerCase().includes("/medium") ? "warning" : "danger"}>{item.path.toLowerCase().includes("/easy") ? "Easy" : item.path.toLowerCase().includes("/medium") ? "Medium" : "Hard"}</Chip>
+                                                </div>
+                                            } startContent={item.path.toLowerCase().includes("/leetcode") ? <SiLeetcode /> : item.path.toLowerCase().includes("/gfg") ? <SiGeeksforgeeks /> : ""}
+                                            textValue={item.name}
+                                            >
+                                                {/* <div className='border px-2 border-gray-600 rounded-lg'> */}
+                                                    <FolderList path={item.path} />
+                                                {/* </div> */}
+                                            </AccordionItem>
+                                        )
                                     }
                                 </Accordion>
-                            </div>)
-                        }
-                    </div>
-                )
+                            </div>
+                        )
+                    }
+                </div>)
             }
-            </div>)
-        }
-    </div>
-  )
+        </main>
+    )
 }
 
 export default Page
