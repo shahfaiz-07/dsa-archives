@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 DSA Archives
 
-## Getting Started
+A developer-friendly web app to browse and search through **my personal solutions** to problems from platforms like **LeetCode**, **GeeksforGeeks**, and others. Solutions are organized by **topic**, **platform**, and **difficulty** — all accessible through an intuitive UI built with **Next.js**, **Tailwind CSS**, **HeroUI**, and **TypeScript**.
 
-First, run the development server:
+---
+
+## 🔍 Features
+
+- ⚡ **Search by URL, keyword, or title** (e.g., "two sum")
+- 🗂️ **Structured folder view**: Topic → Platform → Difficulty → Problem
+- 🎨 **Syntax-highlighted code** viewer for Java and C++
+- 📂 **Live folder data** fetched from a GitHub public repo
+- 📦 Minimal API layer using Next.js `app` directory
+- 📱 Fully responsive & optimized for mobile
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS + HeroUI
+- **Icons**: React Icons
+- **Code Highlighting**: `react-syntax-highlighter`
+- **Data Fetching**: Axios + GitHub API
+
+---
+
+## 🗃 Folder Structure (Example)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+dsa_archives/
+├── Array/
+│   ├── LeetCode/
+│   │   ├── Easy/
+│   │   │   └── TwoSum/
+│   │   │       ├── TwoSum.cpp
+│   │   │       └── TwoSum.java
+````
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> 📎 Metadata is pre-generated using a local script and stored as `metadata.json` for efficient searching.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Metadata Script
 
-## Learn More
+To keep the search fast, a script is used locally to crawl the folder structure and generate a `metadata.json` with:
 
-To learn more about Next.js, take a look at the following resources:
+* `url`: the problem link
+* `path`: the GitHub folder path of the solution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> This JSON is uploaded manually to the GitHub repo and used in production.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🌐 Live Demo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> The project is deployed on [Vercel](https://dsa-archives.vercel.app/).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🙌 Author
+
+**S. Faizaan Hussain**
+
+* GitHub: [@shahfaiz-07](https://github.com/shahfaiz-07)
+* Portfolio: [portfolio-nine-cyan-awvxdg979r.vercel.app](https://portfolio-nine-cyan-awvxdg979r.vercel.app/)
+
